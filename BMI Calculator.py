@@ -1,6 +1,5 @@
 from tkinter import *
 
-
 class BMI_GUI:
 
     def __init__(self):
@@ -44,7 +43,7 @@ class BMI_GUI:
         self.output_label.pack(side='left')
 
         self.diag_label = Label(self.mid_frame3,
-                                    text='Your BMI indicates that you are')
+                                    text='Your BMI indicates that you are:')
 
         self.value2 = StringVar()
         self.output_label2 = Label(self.mid_frame3,
@@ -61,20 +60,35 @@ class BMI_GUI:
         self.bottom_frame.pack()
 
     def BMI_Calc(self):
-        """This function calculates the BMI"""
+        """This function calculates the BMI and diagnoses your weight based on it."""
 
         height = float(self.height_entry.get())
         weight = float(self.weight_entry.get())
         BMI = weight*703/height**2
         self.value.set(round(BMI, 1))
 
-        if BMI < 18.5:
+        if BMI <= 15:
+            self.value2.set('very severely underweight')
+        elif  15 < BMI <= 16:
+            self.value2.set('severely underweight')
+        elif 16 <= BMI < 18.5:
             self.value2.set('underweight')
-        elif BMI > 25:
-            self.value2.set('overweight')
-        else:
+        elif 18.5 < BMI <= 25:
             self.value2.set('optimal weight')
-
+        elif 25 <= BMI < 30:
+            self.value2.set('overweight')
+        elif 30 < BMI <= 35:
+            self.value2.set('obese')
+        elif 35 <= BMI < 40:
+            self.value2.set('severely obese')
+        elif 40 < BMI <= 45:
+            self.value2.set('very severely obese')
+        elif 45 <= BMI < 50:
+            self.value2.set('morbidly obese')
+        elif 50 < BMI <= 55:
+            self.value2.set('super obese')
+        elif 60 <= BMI:
+            self.value2.set('hyper obese')
 
 root = Tk()
 root.title('BMI Calculator')
